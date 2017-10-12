@@ -31,8 +31,12 @@ local function listenFun(sock)
 end
 
 function module.start()
-	telnetServer = net.createServer(net.TCP, 180)
-	telnetServer:listen(23, listenFun)
+	module.server = net.createServer(net.TCP, 180)
+	module.server:listen(23, listenFun)
+end
+
+function module.stop()
+  module.server:close()
 end
 
 return module

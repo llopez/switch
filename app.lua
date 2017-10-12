@@ -4,8 +4,10 @@ m = nil
 gpio.mode(4, gpio.OUTPUT)
 gpio.write(4, gpio.LOW)
 
-local function send_ping()  
-  m:publish(config.mqtt.channel .. "ping", config.chipid .." ".. wifi.sta.getip(), 0, 0)
+local function send_ping()
+  if wifi.sta.getip() then
+    m:publish(config.mqtt.channel .. "ping", config.chipid .." ".. wifi.sta.getip(), 0, 0)
+  end
 end
 
 local function register_myself()  
